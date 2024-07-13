@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETS</title>
+    <link rel="stylesheet" href="vender.css">
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: hsl(0, 0%, 100%);
+}
+
+.nav{
+    width: 1530px;
+    height: 60px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 1px 1px 5px black;
+
+}
+
+.logo a{
+    text-decoration: none;
+    font-size: 32px;
+    color: black;
+    font-weight: 600;
+    text-align: center;
+
+}
+
+.logo a:hover{
+    color: brown;
+    
+}
+
+.nav-con a{
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    padding-right: 30px;
+}
+
+.nav-con a:hover{
+    color: brown;
+}
+
+.login a{
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 20px;
+}
+
+.login a:hover{
+    color: white;
+    border-color: brown;
+    background-color: brown;
+}
+
+.search p{
+    margin-left: 10%;
+    margin-top: 5%;
+    font-size: 40px;
+}
+
+.form{
+    width: 50%;
+    margin: 0 auto;
+    height: 500px;
+    background-color:  #ffffff;
+    margin-top: 8%;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 10px;
+  
+}
+
+
+.form h2{
+    text-align: center;
+    padding: 20px;
+}
+
+.form hr{
+    margin: 0% 10%;
+    color: black;
+    width: 80%;
+    margin-bottom: 10px;
+   
+}
+
+#company, #name, #contact, #item,#add , #qty, #ref_name{
+    width: 450px;
+    height: 30px;
+    margin: 1% 23%;
+    font-size: 15px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    color: black;
+    text-transform: capitalize;
+
+    
+}
+
+#submit {
+    margin-top: 3%;
+    margin-left:  30%;
+    width: 150px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 7px;
+    font-size: 15px;
+
+
+}
+
+#submit:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(48, 243, 162);
+    border: none;
+}
+
+#reset{
+    margin-top: 3% ;
+    margin-left: 3%;
+    width: 150px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 7px;
+    font-size: 15px;
+
+
+}
+
+#reset:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(241, 198, 68);
+    border: none;
+}
+
+#search{
+    width:250px;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+    font-size: 13px ;
+    float: right;
+    margin-right: 15%;
+    
+    background-color: #f6f5f4;
+    margin-bottom: 3%;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+  
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="logo">
+            <a href="{% url 'main' %}">AETS</a>
+        </div>
+
+        <div class="nav-con">
+            <a href="{% url 'vender' %}">Vender Details</a>
+            <a href="{% url 'logs' %}">All logs</a>
+        </div>
+
+        <div class="login">
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+
+           
+        </div>
+    </nav>
+
+    
+    <form action="" method="post" class="form">
+        <h2>ADD Vender</h2>
+        <hr>
+        {% csrf_token %}
+        <input type="text" name="name" id="name" placeholder="name" required><br>
+        <input type="text" name="company" id="company" placeholder="company" required><br>
+        <input type="text" name="contact" id="contact" placeholder="contact" required><br>
+        <input type="text" name="add" id="add" placeholder="address" required><br>
+       
+        <button type="submit" id="submit">submit</button>
+        <button type="reset" id="reset">reset</button>
+
+
+    </form>
+
+    <form action="" method="get">
+        <div class="search">
+            <p class="logs">Vender Details</p>
+            <input type="search" name="search" id="search" placeholder="Search">
+        </div>
+    </form>
+    
+
+    <div class="table">
+        <table>
+            <tr>
+              <th>Company</th>
+              <th>Name</th>
+              <th>Contact</th>
+              <th>Address</th>
+              
+            </tr>
+            {% for i in ven %}
+            <tr>
+              <td>{{i.company_name}}</td>
+              <td>{{i.vendor_name}}</td>
+              <td>{{i.contact_number}}</td>
+              <td>{{i.address}}</td>
+              
+            </tr>
+            {% endfor %}
+           
+            
+            
+          </table>
+    
+</body>
+</html>
